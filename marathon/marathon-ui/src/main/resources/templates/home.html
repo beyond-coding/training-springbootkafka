@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+
+    <title>Marathon</title>
+
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+</head>
+<body>
+
+<div class="container">
+
+    <h3 class="teal-text lighten-3">The Marathon</h3>
+    <div class="row">
+
+        <div class="col s6">
+            <h5>Winner</h5>
+            <p th:if="${winner == null}">Nobody yet</p>
+            <p th:unless="${winner == null}">
+                <span th:text="${winner.name}">Stephanie</span>
+                with a time of
+                <span th:text="${winner.minutes}">18</span>
+                minutes
+            </p>
+            <div class="divider"></div>
+            <h5>Runners</h5>
+            <table class="striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Minutes</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="runner : ${runners}">
+                    <td th:text="${runner.name}">Alvin</td>
+                    <td th:text="${runner.minutes}">12 minutes</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col s6">
+            <h5>Arrivals</h5>
+            <form th:object="${runner}" th:action="@{/}" method="post">
+                <div class="input-field">
+                    <input th:field="*{name}" placeholder="Name" id="name" type="text" autofocus="autofocus">
+                    <label for="name">Name</label>
+                </div>
+                <div class="input-field">
+                    <input th:field="*{minutes}" placeholder="Minutes" id="minutes" type="number">
+                    <label for="minutes">Name</label>
+                </div>
+                <button class="waves-effect waves-light btn">Save</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+
+</body>
+</html>

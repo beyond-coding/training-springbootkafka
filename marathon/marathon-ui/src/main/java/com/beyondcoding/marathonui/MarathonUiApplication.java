@@ -1,0 +1,12 @@
+package com.beyondcoding.marathonui;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MarathonUiApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(MarathonUiApplication.class, args);
+	}
+}
