@@ -1,0 +1,5 @@
+game:
+  available-shapes:
+    rock: scissors
+    scissors: paper
+    paper: rock
