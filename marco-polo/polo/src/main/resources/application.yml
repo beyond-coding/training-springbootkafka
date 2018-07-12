@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: marcopolo.marco
+        output:
+          destination: marcopolo.polo
