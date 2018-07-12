@@ -1,11 +1,13 @@
 package com.beyondcoding.rockscissorspaper.players;
 
 import com.beyondcoding.rockscissorspaper.domain.Shape;
+import com.beyondcoding.rockscissorspaper.io.Input;
+import com.beyondcoding.rockscissorspaper.io.Output;
 import com.beyondcoding.rockscissorspaper.logic.Shapes;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 
 import java.util.Optional;
-import java.util.Scanner;
 
 
 @RequiredArgsConstructor
@@ -13,29 +15,32 @@ public class HumanPlayer implements Player {
 
     private final Shapes shapes;
 
-    private Scanner scanner = new Scanner(System.in);
+    private final Input input;
+
+    private final Output output;
 
     @Override
     public Shape play() {
-        Optional<Shape> shape = pickOneShape();
+        val shape = pickOneShape();
         if (!shape.isPresent()) {
+            output.line("Sorry, couldn't recognize your writting");
             return play();
         }
         return shape.get();
     }
 
     private Optional<Shape> pickOneShape() {
-        System.out.print("Please, choose one shape (" + shapes.asString() + "): ");
-        String input = scanner.next();
+        output.text("Please, choose one shape (" + shapes.asString() + "): ");
+        val choice = input.get();
         return shapes.asList().stream()
-                .filter(shape -> shape.getName().equalsIgnoreCase(input))
+                .filter(shape -> shape.getName().equalsIgnoreCase(choice))
                 .findFirst();
     }
 
     @Override
     public boolean wantsToPlayAgain() {
-        System.out.print("Do you want to play again? (y/n): ");
-        String input = scanner.next();
-        return "y".equalsIgnoreCase(input);
+        output.text("Do you want to play again? (y/n): ");
+        val choice = input.get();
+        return "y".equalsIgnoreCase(choice);
     }
 }

@@ -4,6 +4,7 @@ import com.beyondcoding.rockscissorspaper.domain.Shape;
 import com.beyondcoding.rockscissorspaper.logic.Shapes;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
 import java.util.Random;
 
 @RequiredArgsConstructor
@@ -15,9 +16,13 @@ public class ComputerPlayer implements Player {
 
     @Override
     public Shape play() {
-        int numberOfShapes = shapes.asList().size();
-        int choice = random.nextInt(numberOfShapes);
-        return shapes.asList().get(choice);
+        return chooseOneShapeAtRandom();
+    }
+
+    private Shape chooseOneShapeAtRandom() {
+        List<Shape> choices = shapes.asList();
+        int choice = random.nextInt(choices.size());
+        return choices.get(choice);
     }
 
     @Override

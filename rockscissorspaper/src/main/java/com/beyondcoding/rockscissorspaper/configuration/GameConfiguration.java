@@ -1,6 +1,8 @@
 package com.beyondcoding.rockscissorspaper.configuration;
 
 import com.beyondcoding.rockscissorspaper.domain.Shape;
+import com.beyondcoding.rockscissorspaper.io.Input;
+import com.beyondcoding.rockscissorspaper.io.Output;
 import com.beyondcoding.rockscissorspaper.logic.Game;
 import com.beyondcoding.rockscissorspaper.logic.Shapes;
 import com.beyondcoding.rockscissorspaper.players.ComputerPlayer;
@@ -12,7 +14,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -35,11 +36,13 @@ public class GameConfiguration {
     }
 
     @Bean
-    List<Player> players(Shapes shapes) {
-        return Arrays.asList(
-                new HumanPlayer(shapes),
-                new ComputerPlayer(shapes)
-        );
+    Player player1(Shapes shapes, Input input, Output output) {
+        return new HumanPlayer(shapes, input, output);
+    }
+
+    @Bean
+    Player player2(Shapes shapes) {
+        return new ComputerPlayer(shapes);
     }
 
     @Bean

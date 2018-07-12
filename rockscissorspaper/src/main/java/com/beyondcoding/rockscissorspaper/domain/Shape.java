@@ -12,7 +12,7 @@ public class Shape {
     private final String defeats;
 
     public boolean defeats(Shape other) {
-        return defeats.equalsIgnoreCase(other.getName());
+        return defeats.contains(other.getName());
     }
 
 }

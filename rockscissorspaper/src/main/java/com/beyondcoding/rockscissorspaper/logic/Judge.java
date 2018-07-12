@@ -22,6 +22,6 @@ public class Judge {
         if (shape2.defeats(shape1)) {
             return "Player 2 wins";
         }
-        return "Noone wins";
+        return "Nobody wins";
     }
 }
