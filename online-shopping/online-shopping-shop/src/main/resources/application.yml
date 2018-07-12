@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers:
+            - localhost
+      bindings:
+        orders:
+          destination: onlineshopping.order
+          content-type: application/json
+          group: shop
+        products:
+          destination: onlineshopping.product
+          content-type: application/json
+server:
+  port: 8081
