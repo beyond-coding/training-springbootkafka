@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Configuration
@@ -30,13 +32,24 @@ public class ConcertConfiguration {
 
     @Bean
     @Order(3)
-    ApplicationRunner concert(Band band) {
+    ApplicationRunner concert(Band band, Audience crowd) {
         return args -> {
             System.out.println("-- CONCERT STARTS");
 
+            band.playFor(crowd);
 
             System.out.println("-- CONCERT ENDS\n\n");
         };
+    }
+
+    @Bean
+    Audience crowd(ApplicationContext applicationContext) {
+        List<Fan> fans = IntStream.generate(() -> 1)
+                .limit(5)
+                .mapToObj(e -> applicationContext.getBean(Fan.class))
+                .collect(Collectors.toList());
+
+        return new Crowd(fans);
     }
 
 }

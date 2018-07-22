@@ -12,6 +12,6 @@ public class Crowd implements Audience {
 
     @Override
     public void listenToMusic() {
-        fans.stream().forEach(Fan::listenToMusic);
+        fans.forEach(Fan::listenToMusic);
     }
 }
