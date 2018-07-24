@@ -1,0 +1,15 @@
+JPA
+
+spring:
+  datasource:
+    url: ${MYSQL_URL:jdbc:mysql://localhost:3306/test}
+    username: ${MYSQL_USERNAME:testusername}
+    password: ${MYSQL_PASSWORD:testpassword}
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+
+NoSQL
+
+spring.data.mongodb.uri=${MONGODB_URI:mongodb://localhost/test}
