@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext
 public class RunnersEndpointTest {
 
 
@@ -44,7 +46,7 @@ public class RunnersEndpointTest {
         assertNull(restTemplate.getForObject("/runners/winner", Runner.class));
         verify(marathon).getRunners();
         verify(marathon).getWinner();
-        verify(marathon, times(0)).add(any(Runner.class));
+        verify(marathon, times(1)).add(any(Runner.class));
     }
 
 
@@ -53,8 +55,7 @@ public class RunnersEndpointTest {
         assertNumberOfRunners(0);
 
         List<Runner> runners = sample.asList();
-        runners.stream()
-                .forEach(runner -> restTemplate.postForObject("/runners", runner, Runner.class));
+        runners.forEach(runner -> restTemplate.postForObject("/runners", runner, Runner.class));
 
         assertNumberOfRunners(runners.size());
         verify(marathon, times(runners.size())).add(any(Runner.class));
