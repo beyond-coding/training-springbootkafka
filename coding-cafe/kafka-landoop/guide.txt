@@ -1,0 +1,22 @@
+docker run --rm --net=host landoop/fast-data-dev
+
+That's it. Visit http://localhost:3030 to get into the fast-data-dev environment
+
+<img src="https://storage.googleapis.com/wch/fast-data-dev-ports.png" alt="fast-data-dev web UI screenshot" type="image/png" width="320">
+
+All the service ports are exposed, and can be used from localhost / or within
+your IntelliJ. The kafka broker is exposed by default at port 9092, zookeeper
+at port 2181, schema registry at 8081, connect at 8083. As an example, to
+access the JMX data of the broker run:
+
+jconsole localhost:9581
+If you want to have the services remotely accessible, then you may need to pass
+in your machine's IP address or hostname that other machines can use to access
+it:
+
+docker run --rm --net=host -e ADV_HOST=<IP> landoop/fast-data-dev
+Hit control+c to stop and remove everything
+
+------------
+
+docker run --rm --net=host --name kafka-landoop landoop/fast-data-dev

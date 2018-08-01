@@ -22,7 +22,7 @@ public class PoloApplication {
     @SendTo(Processor.OUTPUT)
     public Person hearMarcoAndSayPolo(Person person) {
         System.out.println("-- MESSAGE RECEIVED -- " + person);
-        Person polo = new Person("Polo");
+        Person polo = new Person("Polo asociado a -  " + person.getName());
         System.out.println("-- MESSAGE SENT -- " + polo);
         return polo;
     }

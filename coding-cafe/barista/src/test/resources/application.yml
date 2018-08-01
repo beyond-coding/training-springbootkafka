@@ -1,0 +1,7 @@
+barista:
+  names: Sarah
+
+beverage:
+  kinds: capuccino,chocolate,macchiato
+  preparation:
+    duration: 100

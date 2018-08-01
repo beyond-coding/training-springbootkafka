@@ -1,0 +1,33 @@
+assistant:
+  product:
+    kinds: muffin,cheese-cake,cookie
+    amount: 3
+  stock:
+    fetch:
+      duration: 6000
+    restock:
+      duration: 12000
+
+server:
+  port: 9102
+
+spring:
+
+  data:
+    mongodb:
+      uri: mongodb://localhost/codingcafe
+
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers:
+            - localhost
+      bindings:
+        orders:
+          destination: codingcafe.order.foodstuff
+          content-type: application/json
+          group: assistants
+        products:
+          destination: codingcafe.product.ready
+          content-type: application/json

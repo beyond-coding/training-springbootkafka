@@ -1,0 +1,26 @@
+barista:
+  names: James,John,Peter,Alberto
+
+beverage:
+  kinds: capuccino,chocolate,macchiato
+  preparation:
+    duration: 10000
+
+server:
+  port: 9101
+
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers:
+            - localhost
+      bindings:
+        orders:
+          destination: codingcafe.order.beverage
+          content-type: application/json
+          group: baristas
+        products:
+          destination: codingcafe.product.ready
+          content-type: application/json

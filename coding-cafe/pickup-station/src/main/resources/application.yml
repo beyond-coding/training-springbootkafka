@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers:
+            - localhost
+      bindings:
+        purchases:
+          destination: codingcafe.order.purchase
+          content-type: application/json
+        products:
+          destination: codingcafe.product.ready
+          content-type: application/json
+
+server:
+  port: 9103

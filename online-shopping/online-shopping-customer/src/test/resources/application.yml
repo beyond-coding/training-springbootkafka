@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        orders:
+          destination: onlineshopping.order
+          content-type: application/json
+        products:
+          destination: onlineshopping.product
+          content-type: application/json
+          group: customer
+

@@ -3,7 +3,6 @@ package com.beyondcoding.marcopolo.marco;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,13 +22,16 @@ public class MarcoApplication {
     @Autowired
     Processor processor;
 
+    private int number = 0;
+
     public static void main(String[] args) {
         SpringApplication.run(MarcoApplication.class, args);
     }
 
     @Scheduled(fixedRate = 5 * 1000)
     public void sayMarcoEveryFiveSeconds() {
-        Person marco = new Person("Marco");
+        number++;
+        Person marco = new Person("Marco " + number);
         System.out.println("-- MESSAGE SENT -- " + marco);
         Message<Person> message = MessageBuilder.withPayload(marco).build();
         processor.output().send(message);

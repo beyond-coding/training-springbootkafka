@@ -7,7 +7,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 @RequiredArgsConstructor
@@ -16,7 +15,7 @@ public class Customer {
 
     private final MessageChannel orders;
 
-    public String order(@PathVariable String product) {
+    public String order(String product) {
         log.warning("CUSTOMER -- Ordering " + product);
         Message<String> message = MessageBuilder.withPayload(product)
                 .build();
